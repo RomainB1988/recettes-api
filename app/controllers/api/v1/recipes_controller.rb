@@ -5,8 +5,18 @@ module Api
 
       def index
         @recipes = Recipe.all
+
+        if params[:title].present?
+          @recipes = @recipes.where("title ILIKE ?", "%#{params[:title]}%")
+        end
+
+        if params[:ingredient].present?
+          @recipes = @recipes.where("ingredients ILIKE ?", "%#{params[:ingredient]}%")
+        end
+
         render json: @recipes
       end
+
 
       def show
         render json: @recipe
