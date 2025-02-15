@@ -3,6 +3,8 @@ module Api
     class CommentsController < ApplicationController
       before_action :set_recipe, only: [:index, :create]
       before_action :set_comment, only: [:destroy]
+      before_action :authenticate_user!, only: [:create, :destroy]
+
 
       def index
         @comments = @recipe.comments
