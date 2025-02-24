@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, defaults: { format: :json },
+  path: '',
+  path_names: {
+    sign_in: 'api/v1/users/sign_in',
+    sign_out: 'api/v1/users/sign_out'
+  }
+  controllers: {
+               sessions: 'users/sessions'
+             }
 
   namespace :api do
     namespace :v1 do
